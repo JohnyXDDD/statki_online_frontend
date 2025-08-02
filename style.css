@@ -1,0 +1,568 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
+ body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-x: hidden;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    background-color: #0b0c10;
+    color: #fff;
+    padding:0 2%;
+    overflow: hidden;
+}
+*{
+    box-sizing: border-box;
+    font-family: 'Rowdies', cursive;
+}
+h1{
+    font-size:56px;
+    text-shadow: 4px 4px 0px #000;
+    margin-top:0;
+    margin-bottom: 16px;
+    width: 100%;
+    text-align: center;
+}
+.start-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-weight:700;
+}
+.start-box label{
+    font-size:18px;
+    font-weight: 300;
+}
+#room_id{
+    margin-left: 8px;
+    outline:none;
+    border:none;
+    font-size:18px;
+    border-radius: 16px;
+    padding: 2px;
+    text-align:center;
+    width: 150px;
+}
+#play,#ready{
+    color:black;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #15240d;
+    background-color: #45a29e;
+    border: none;
+    padding: 4px 8px;
+}
+.beta{
+    margin: 8px 0 0 0;
+}
+#play{
+    margin-top:16px;
+    width: 128px;
+}
+.game_area{
+    display:none;
+    max-width: 1000px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.game_area h1{
+    text-align: center;
+}
+.center_div{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    width: 100%;
+}
+.board{
+    display: grid;
+    grid-template-columns: repeat(11,42px);
+    grid-template-rows: repeat(11,42px);
+    justify-content: center;
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
+.block{
+    border: 1px solid black;
+    background: #2389da;
+    cursor: pointer;
+    transition: background-image 0.5s ease;
+}
+.info{
+    text-align: center;
+    color: white;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+[class*="ships"]{
+    display: flex;
+}
+.instruction{
+    position: absolute;
+    background-color: #FAF5E9;
+    border:8px solid rgb(137 77 16);
+    padding: 8px 16px;
+    border-radius: 32px;
+    color: #000;
+    top: 50%;
+    transform:translateY(-50%);
+    max-width: 456px;
+    width: 100%;
+    visibility:hidden;
+}
+.instruction.visible{
+    visibility:visible;
+}
+.instruction h2{
+    margin: 0;
+    font-size:28px;
+    text-align: center;
+}
+.instruction h3{
+    font-size: 22px;
+    margin: 8px 0;
+}
+.instruction p{
+    text-align: justify;
+}
+#close_instruction{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height:100%;
+    border: none;
+    font-size: 24px;
+    background:none;
+    color: #bf001a;
+    cursor: pointer;
+    transition: color 0.2s linear;
+}
+#close_instruction:hover{
+    color: #fd3c56;
+}
+.top_instruction{
+    position: relative;
+}
+#open_info{
+    position:absolute;
+    top: 0;
+    right: 0;
+    font-size: 32px;
+    background:none;
+    color: #FAF5E9;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s linear;
+}
+#open_info:hover{
+    color: #45a29e;
+}
+.change-ships{
+    font-weight: 300 !important;
+    text-align: center;
+    max-width: 512px;
+    text-align: justify;
+}
+
+.info-h2{
+    text-align: center;
+    margin: 0;
+    color: #FAF5E9;
+    margin-left: 20px;
+}
+.waiting,.turn{
+    text-transform: uppercase;
+    text-align: center;
+    color: rgb(223, 84, 84);
+    transition: color 0.5s ease;
+    margin-bottom: 0;
+}
+.popup{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    top: 16px;
+    width: 100vw;
+}
+.popup_text{
+    max-width: 400px;
+    padding:8px;
+    margin: 4px;
+    background-color: #FAF5E9;
+    border-radius:8px;
+    color: #000;
+    text-align: center;
+}
+.change-ships{
+    display: flex;
+    justify-content: space-between;
+    margin-top:20px;
+    font-size:18px;
+    font-weight:bold;
+    color: #45a29e;
+}
+.change-ship{
+    cursor: pointer;
+}
+.ship{
+    border-radius: 2px;
+    background: url('images/single.png');
+    background-size: cover ;
+}
+.preview{
+    background: url('images/preview.png');
+    background-size: cover ;
+}
+.empty{
+    background-image:url('images/empty.png') !important;
+    background-size: cover ;
+    cursor: not-allowed;
+}
+.destroyed{
+    background-image:url('images/destroyed_single.png') !important;
+    background-size: cover ;
+}
+.hitted{
+    background-image:url('images/green_single.png') ;
+    background-size: cover ;
+}
+.clear{
+    background-image:url('images/empty.png') !important;
+    background-size: cover ;
+}
+.we_got_hit{
+    background-image:url('images/hitted_single.png') ;
+}
+.copyright{
+    bottom: 0;
+    display:flex;
+    align-items:end;
+    margin:16px 0;
+    height: 20px;
+}
+.copyright p{
+    margin:0;
+    font-size: 16px;
+}
+.copyright img{
+    height: 20px;
+}
+.game_code{
+    position: absolute;
+    left: 4px;
+    top: 0;
+}
+.rotate_box{
+    justify-content: center;
+    display: flex;
+    margin: 12px 0;
+}
+#rotate{
+    background: none;
+    outline: none;
+    border: none;
+    color:#ebff9c;
+    cursor: pointer;
+    font-size: 16px ;
+}
+.active{
+    color:#FAF5E9;
+}
+.license{
+    color: rgb(139, 139, 231);
+    text-decoration: none;
+}
+@media (max-height:768px){
+    .board{
+        display: grid;
+        grid-template-columns: repeat(11,36px);
+        grid-template-rows: repeat(11,36px);
+    }
+    .info_header{
+        font-size: 40px;
+        margin-bottom: 8px;
+    }
+    .info{
+        font-size:14px;
+    }
+    .waiting{
+        font-size: 18px;
+    }
+    .popup{
+        top: 16px;
+    }
+    .change-ship{
+        font-size: 14px;
+    }
+    .turn{
+        font-size:18px;
+    }
+    .info-h2{
+        font-size: 18px;
+    }
+    #open_info{
+        font-size: 20px;
+    }
+}
+@media(min-width:801px){
+    .enemy{
+        margin-left:40px
+    }
+}
+@media(max-width:1000px){
+    .two_boards_inside .board{
+        display: grid;
+        grid-template-columns: repeat(11,38px);
+        grid-template-rows: repeat(11,38px);
+    }
+}
+@media(max-width:900px){
+    .two_boards_inside .board{
+        display: grid;
+        grid-template-columns: repeat(11,36px);
+        grid-template-rows: repeat(11,36px);
+    }    
+    .instruction p{
+        font-size: 14px;
+    }
+}
+@media(max-width:850px){
+    .two_boards_inside .board{
+        display: grid;
+        grid-template-columns: repeat(11,34px);
+        grid-template-rows: repeat(11,34px);
+    }
+    .enemy{
+        margin-left:20px
+    }
+    .change-ship{
+        font-size:16px;
+    }
+}
+@media(max-width:800px){
+    .info_header{
+        font-size: 48px;
+        margin-bottom: 16px;
+    }
+    .two_boards_inside .board{
+        grid-template-columns: repeat(11,30px) !important;
+        grid-template-rows: repeat(11,30px) !important;
+    }
+    .info-h2{
+        margin:4px 0;
+        font-size:18px;
+    }
+    .turn{
+        font-size:20px
+    }
+    .game_code{
+        font-size:12px;
+    }
+}
+@media(max-width:700px){
+    .center_div{
+        flex-direction: column;
+    }
+    .turn{
+        font-size:14px;
+    }
+    .enemy{
+        margin-left:0;
+    }
+    .enemy h2{
+        margin-top:16px;
+    }
+    .change-ship{
+        font-size:14px;
+    }
+}
+@media(max-width:600px){
+    .change-ships{
+        font-size: 16px;
+    }
+    .waiting{
+        font-size:18px
+    }
+    .board{
+        display: grid;
+        grid-template-columns: repeat(11,30px);
+        grid-template-rows: repeat(11,30px);
+    }
+    .info{
+        font-size:12px ;
+    }
+    .info_header{
+        font-size:32px;
+    }
+    #open_info{
+        font-size: 20px;
+    }
+}
+@media(max-width:400px){
+    .change-ships{
+        font-size: 14px;
+    }
+    .waiting{
+        font-size:16px
+    }
+    .board{
+        display: grid;
+        grid-template-columns: repeat(11,26px);
+        grid-template-rows: repeat(11,26px);
+    }
+    .info{
+        font-size:12px ;
+    }
+    .info_header{
+        font-size:30px;
+    }
+    h2.waiting{
+        font-size:14px;
+    }
+    .instruction p{
+        font-size: 12px;
+    }
+}
+@media (max-width:400px){
+    .change-ship{
+        font-size:13px;
+    }
+    .waiting{
+        font-size:14px;
+    }
+}
+@media((max-width:700px) AND (max-height:800px)){
+    .two_boards_inside .board{
+        display: grid;
+        grid-template-columns: repeat(11,22px) !important;
+        grid-template-rows: repeat(11,22px)!important;
+    }
+    .info_header{
+        font-size: 20px;
+        margin-bottom:0;
+    }
+    .info{
+        font-size:10px;
+    }
+    .change-ships{
+        font-size: 14px;
+    }
+    .waiting{
+        font-size:16px
+    }
+    .turn{
+        font-size:12px;
+        margin: 8px;
+    }
+    .info-h2{
+        margin:4px 0;
+        font-size:12px;
+    }
+    .enemy h2{
+        margin-top:12px;
+    }
+    .instruction p{
+        font-size:14px;
+    }
+    .instruction h3{
+        font-size:20px;
+    }
+    #rotate{
+        font-size:14px;
+    }
+}
+@media((orientation:landscape) AND (max-height:560px)){
+    .info_header{
+        font-size: 20px;
+        margin-bottom:0;
+    }
+    .info{
+        font-size:10px;
+    }
+    .center_div{
+        flex-direction: row;
+    }
+    .board{
+        display: grid;
+        grid-template-columns: repeat(11,20px) !important;
+        grid-template-rows: repeat(11,20px) !important;
+    }
+    .enemy{
+        margin-left:20px;
+    }
+    h2.info-h2{
+        margin: 4px 0;
+    }
+    .change-ships{
+        margin-top: 8px;
+    }
+    .change-ship{
+        font-size:11px;
+    }
+    .change-ship+.change-ship{
+        margin-left: 5px;
+    }
+    #ready{
+        font-size: 14px;
+        padding: 2px 4px;
+    }
+    .waiting{
+        font-size:14px
+    }
+    .turn{
+        font-size:12px;
+        margin: 8px;
+    }
+    .instruction h2{
+        font-size: 16px;
+    }
+    .instruction p{
+        font-size:10px;
+    }
+    .instruction h3{
+        font-size:14px;
+        margin: 2px;
+    }
+    .rotate_box{
+        margin:2px;
+    }
+    #rotate{
+        font-size:12px;
+    }
+}
+@media((orientation:landscape) AND (max-height:340px)){
+    body{
+        overflow:auto;
+    }
+    .board{
+        display: grid;
+        grid-template-columns: repeat(11,16px) !important;
+        grid-template-rows: repeat(11,16px) !important;
+    }
+    .info{
+        font-size:8px;
+    }
+    h1.info_header{
+        font-size:12px;
+    }
+    #rotate{
+        font-size:10px;
+    }
+    #ready{
+        padding:1px 2px;
+        font-size: 10px;
+    }
+}

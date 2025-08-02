@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATKI ONLINE</title>
+    <meta name="keywords" content="Statki, statki online, gry dla dwóch, gry dla 2, LJ studio">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+        integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script defer type="module" src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fontello/css/fontello.css">
+    <link rel="shortcut icon" href="images/destroyed_single.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="popup">
+    </div>
+    <div class="start-box">
+        <h1>STATKI ONLINE</h1>
+        <label for="room_id">Kod pokoju:<input maxlength="10" autocomplete="off" type="text" name=""
+                id="room_id"></label>
+        <button type="submit" id="play">graj</button>
+        <span class="copyright">
+            <p>Copyright&#9426:</p><img src="images/LJ_Studio_logo.png">
+        </span>
+        <a class="license" target="_blank" href="https://www.freepik.com/author/macrovector">Images designed by
+            macrovector</a>
+    </div>
+    <div class="game_area">
+        <h1 class="info_header">TWOJA PLANSZA</h1>
+        <div class="center_div">
+            <div class="user">
+                <div class="board">
+                </div>
+                <div class="change-ships">
+                    <a class="change-ship active" id="single">Jedynka</a>
+                    <a class="change-ship" id="double">Dwójka</a>
+                    <a class="change-ship" id="triple">Trójka</a>
+                    <a class="change-ship" id="fourfold">Czwórka</a>
+                    <a class="change-ship" id="fivefold">Piątka</a>
+                    <a class="change-ship" id="sixfold">Szóstka</a>
+                </div>
+                <div class="rotate_box">
+                    <button id="rotate">Obróć statek</button>
+                </div>
+                <h2 class="waiting">oczekiwanie na drugiego gracza</h2>
+            </div>
+        </div>
+    </div>
+    <div class="instruction">
+        <div class="top_instruction">
+            <h2>Jak grać?</h2>
+            <button id="close_instruction"><i class="demo-icon icon-cancel"></i></button>
+        </div>
+        <h3>Rozmieszczanie statków na planszy</h3>
+        <p>Wybierz statek, a następnie najedź kursorem na planszę, jeśli w danym miejscu możesz umieścić statek to
+            pojawi się podgląd (Statki nie mogą mieć wspólnych krawędzi oraz wierzchołków). Kliknij na pole, aby go
+            umieścić. Po umieszczeniu wszystkich statków zgłoś gotowość. Mając wybrany statek, możesz go obrócić. Statki
+            z planszy możesz usunąć klikając na nie.
+            Po rozmieszczeniu wszystkich statków zgłoś gotowość!</p>
+        <h3>Pojedynek z przeciwnikiem</h3>
+        <p>Strzały oddajesz klikając na planszę przeciwnika. Po trafieniu w statek przeciwnika strzelasz dalej.
+            Pamiętaj, że przeciwnik nie mógł rozmieścić statków bezpośrednie obok siebie.</p>
+    </div>
+    <button id="open_info"><i class="demo-icon icon-info-circled-alt"></i></button>
+</body>
+
+</html>
